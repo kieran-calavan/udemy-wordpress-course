@@ -14,9 +14,9 @@ class Like {
     var currentLikeBox = $(e.target).closest(".like-box")
 
     if (currentLikeBox.data("exists") == "yes") {
-      this.deleteLike(currentLikeBox);
+      this.deleteLike(currentLikeBox)
     } else {
-      this.createLike(currentLikeBox);
+      this.createLike(currentLikeBox)
     }
   }
 
@@ -24,7 +24,7 @@ class Like {
     $.ajax({
       url: universityData.root_url + "/wp-json/university/v1/manageLike",
       type: "POST",
-      data: {'professorId': currentLikeBox.data('professor')},
+      data: { "professorId": currentLikeBox.data("professor") },
       success: response => {
         console.log(response)
       },

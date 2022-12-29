@@ -2250,7 +2250,7 @@ class Like {
       url: universityData.root_url + "/wp-json/university/v1/manageLike",
       type: "POST",
       data: {
-        'professorId': currentLikeBox.data('professor')
+        "professorId": currentLikeBox.data("professor")
       },
       success: response => {
         console.log(response);
