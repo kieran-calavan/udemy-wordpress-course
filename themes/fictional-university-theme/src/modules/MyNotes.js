@@ -85,12 +85,10 @@ class MyNotes {
   }
 
   createNote(e) {
-
     var ourNewPost = {
       "title": $(".new-note-title").val(),
       "content": $(".new-note-body").val(),
       "status": 'publish'
-
     }
 
     $.ajax({
