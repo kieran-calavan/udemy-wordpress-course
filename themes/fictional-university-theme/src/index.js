@@ -4,7 +4,7 @@ import "../css/style.scss"
 import MobileMenu from "./modules/MobileMenu"
 import HeroSlider from "./modules/HeroSlider"
 import GoogleMap from "./modules/GoogleMap"
-import Search from "./modules/search"
+import Search from "./modules/Search"
 import MyNotes from "./modules/MyNotes"
 import Like from "./modules/Like"
 

@@ -1,6 +1,7 @@
 <?php
 
 require get_theme_file_path('/includes/search-route.php');
+require get_theme_file_path('/includes/like-route.php');
 
 function university_custom_rest() {
   register_rest_field('post', 'authorName', array(
@@ -30,7 +31,6 @@ function pageBanner($args = NULL) {
       $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
     }
   }
-
 
   ?>
   <div class="page-banner">
@@ -168,4 +168,3 @@ function makeNotePrivate($data, $postarr) {
   }
   return $data;
 }
-

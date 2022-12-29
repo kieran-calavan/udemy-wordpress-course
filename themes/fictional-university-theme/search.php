@@ -20,7 +20,7 @@ pageBanner(array(
   }
 
   get_search_form();
-
+  
 ?>
 
 </div>
