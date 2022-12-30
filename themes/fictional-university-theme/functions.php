@@ -168,3 +168,11 @@ function makeNotePrivate($data, $postarr) {
   }
   return $data;
 }
+
+// function to exclude node_modules when using All-in-One WP Migration plug-in.
+// add_filter('ai1wm_exclude_content_from_export', 'ignoreCertainFiles');
+
+// function ignoreCertainFiles($exclude_filters) {
+//   $exclude_filters[] = 'themes/fictional-university-theme/node_modules';
+//   return $exclude_filters;
+// }
