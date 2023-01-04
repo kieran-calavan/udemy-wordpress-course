@@ -2,20 +2,28 @@ wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
   title: 'Are You Paying Attention?',
   icon: 'smiley',
   category: 'common',
-  edit: function () {  // controls what you'll see in the admin post editor screen
+  attributes: {
+    skyColor: { type: "string"},
+    grassColor: { type: "string"}
+  },
+  edit: function (props) {  // controls what you'll see in the admin post editor screen
+
+    function updateSkyColor(event) {
+      props.setAttributes({skyColor: event.target.value})
+    }
+
+    function updateGrassColor(event) {
+      props.setAttributes({grassColor: event.target.value})
+    }
+
     return (
       <div>
-        <p>Hello, this is a paragraph</p>
-        <h4>Hi there.</h4>
+        <input type="text" placeholder="sky color" value={props.attributes.skyColor} onChange={updateSkyColor} />
+        <input type="text" placeholder="grass color" value={props.attributes.grassColor} onChange={updateGrassColor} />
       </div>
     )
   },
-  save: function () {  // what public sees in content
-    return (
-      <div>
-        <h3>H3 on the frontend.</h3>
-        <h5>H5 on the frontend.</h5>
-      </div>
-    )
-  }
+  save: function (props) {  // controls the frontend in content
+    return null
+  },
 })
