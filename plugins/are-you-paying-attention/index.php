@@ -27,7 +27,7 @@ class AreYouPayingAttention {
 
   function theHTML($attributes) {
     ob_start(); ?>
-    <h3>Today the sky is <?php echo esc_html($attributes['skyColor']) ?> and the grass is <?php echo esc_html($attributes['grassColor']) ?>!</h3>
+    <!-- <h3>Today the sky is <?php echo esc_html($attributes['skyColor']) ?> and the grass is <?php echo esc_html($attributes['grassColor']) ?>!</h3> -->
 <?php return ob_get_clean();
   }
 }
