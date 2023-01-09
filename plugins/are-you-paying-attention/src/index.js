@@ -1,28 +1,23 @@
 import "./index.scss"
-import {
-  TextControl,
-  Flex,
-  FlexBlock,
-  FlexItem,
-  Button,
-  Icon,
-} from "@wordpress/components"
+import { TextControl, Flex, FlexBlock, FlexItem, Button, Icon, PanelBody, PanelRow, ColorPicker } from "@wordpress/components"
+import { InspectorControls, BlockControls, AlignmentToolbar } from "@wordpress/block-editor"
+import { ChromePicker } from "react-color"
 ;(function () {
   let locked = false
+
   wp.data.subscribe(function () {
     const results = wp.data
       .select("core/block-editor")
       .getBlocks()
       .filter(function (block) {
-        return (
-          block.name == "ourplugin/are-you-paying-attention" &&
-          block.attributes.correctAnswer == undefined
-        )
+        return block.name == "ourplugin/are-you-paying-attention" && block.attributes.correctAnswer == undefined
       })
+
     if (results.length && locked == false) {
       locked = true
       wp.data.dispatch("core/editor").lockPostSaving("noanswer")
     }
+
     if (!results.length && locked) {
       locked = false
       wp.data.dispatch("core/editor").unlockPostSaving("noanswer")
@@ -38,15 +33,25 @@ wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
     question: { type: "string" },
     answers: { type: "array", default: [""] },
     correctAnswer: { type: "number", default: undefined },
+    bgColor: { type: "string", default: "#EBEBEB" },
+    theAlignment: { type: "string", default: "left" },
+  },
+  description: "Give your audience a chance to prove their comprehension.",
+  example: {
+    attributes: {
+      question: "What is my name?",
+      correctAnswer: 3,
+      answers: ["Meowsalot", "Barksalot", "Purrsloud", "Brad"],
+      theAlignment: "center",
+      bgColor: "#CFE8F1",
+    },
   },
   edit: EditComponent,
-  // controls the frontend in content
   save: function (props) {
     return null
   },
 })
 
-// controls what you'll see in the admin post editor screen
 function EditComponent(props) {
   function updateQuestion(value) {
     props.setAttributes({ question: value })
@@ -68,7 +73,28 @@ function EditComponent(props) {
   }
 
   return (
-    <div className="paying-attention-edit-block">
+    <div
+      className="paying-attention-edit-block"
+      style={{ backgroundColor: props.attributes.bgColor }}>
+      <BlockControls>
+        <AlignmentToolbar
+          value={props.attributes.theAlignment}
+          onChange={(x) => props.setAttributes({ theAlignment: x })}
+        />
+      </BlockControls>
+      <InspectorControls>
+        <PanelBody
+          title="Background Color"
+          initialOpen={true}>
+          <PanelRow>
+            <ChromePicker
+              color={props.attributes.bgColor}
+              onChangeComplete={(x) => props.setAttributes({ bgColor: x.hex })}
+              disableAlpha={true}
+            />
+          </PanelRow>
+        </PanelBody>
+      </InspectorControls>
       <TextControl
         label="Question:"
         value={props.attributes.question}
@@ -81,7 +107,6 @@ function EditComponent(props) {
           <Flex>
             <FlexBlock>
               <TextControl
-                autoFocus={answer == undefined}
                 value={answer}
                 onChange={(newValue) => {
                   const newAnswers = props.attributes.answers.concat([])
@@ -94,11 +119,7 @@ function EditComponent(props) {
               <Button onClick={() => markAsCorrect(index)}>
                 <Icon
                   className="mark-as-correct"
-                  icon={
-                    props.attributes.correctAnswer == index
-                      ? "star-filled"
-                      : "star-empty"
-                  }
+                  icon={props.attributes.correctAnswer == index ? "star-filled" : "star-empty"}
                 />
               </Button>
             </FlexItem>
@@ -116,9 +137,7 @@ function EditComponent(props) {
       <Button
         isPrimary
         onClick={() => {
-          props.setAttributes({
-            answers: props.attributes.answers.concat([undefined]),
-          })
+          props.setAttributes({ answers: props.attributes.answers.concat([""]) })
         }}>
         Add another answer
       </Button>
