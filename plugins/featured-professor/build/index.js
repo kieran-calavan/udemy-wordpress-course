@@ -109,17 +109,37 @@ wp.blocks.registerBlockType("ourplugin/featured-professor", {
   description: "Include a short description and link to a professor of your choice",
   icon: "welcome-learn-more",
   category: "common",
+  attributes: {
+    profId: {
+      type: "string"
+    }
+  },
   edit: EditComponent,
   save: function () {
     return null;
   }
 });
-function EditComponent() {
+function EditComponent(props) {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "featured-professor-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "professor-select-container"
-  }, "We will have a select dropdown form element here."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "The HTML preview of the selected professor will appear here."));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    onChange: e => props.setAttributes({
+      profId: e.target.value
+    })
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: ""
+  }, "Select a professor"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "1",
+    selected: props.attributes.profId == 1
+  }, "1"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "2",
+    selected: props.attributes.profId == 2
+  }, "2"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "3",
+    selected: props.attributes.profId == 3
+  }, "3"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "The HTML preview of the selected professor will appear here."));
 }
 })();
 
