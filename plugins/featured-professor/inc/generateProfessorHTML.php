@@ -14,7 +14,7 @@ function generateProfessorHTML($id) {
 
       </div>
       <div class="professor-callout__text">
-        <h5><?php the_title(); ?></h5>
+        <h5><?php echo esc_html(get_the_title()); ?></h5>
         <p><?php echo wp_trim_words(get_the_content(), 30) ?></p>
 
         <?php
