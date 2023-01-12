@@ -5,6 +5,8 @@
   Version: 1.0
   Author: Kieran
   Author URI: https://www.kierancalavan.com
+  Text Domain: featured-professor
+  Domain Path: /languages
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -38,6 +40,7 @@ class FeaturedProfessor {
   }
 
   function onInit() {
+    load_plugin_textdomain('featured-professor', false, dirname(plugin_basename(__FILE__)) . '/languages');
     register_meta('post', 'featuredprofessor', array(
       'show_in_rest' => true,
       'type' => 'number',

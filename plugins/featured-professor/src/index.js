@@ -2,6 +2,7 @@ import "./index.scss"
 import { useSelect } from "@wordpress/data"
 import { useState, useEffect } from "react"
 import apiFetch from "@wordpress/api-fetch"
+const __ = wp.i18n.__
 
 wp.blocks.registerBlockType("ourplugin/featured-professor", {
   title: "Professor Callout",
