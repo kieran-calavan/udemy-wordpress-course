@@ -65,7 +65,7 @@ function EditComponent(props) {
     <div className="featured-professor-wrapper">
       <div className="professor-select-container">
         <select onChange={(e) => props.setAttributes({ profId: e.target.value })}>
-          <option value="">Select a professor</option>
+          <option value="">{__("Select a professor", "featured-professor")}</option>
           {allProfs.map((prof) => {
             return (
               <option

@@ -207,7 +207,7 @@ function EditComponent(props) {
     })
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
-  }, "Select a professor"), allProfs.map(prof => {
+  }, __("Select a professor", "featured-professor")), allProfs.map(prof => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       value: prof.id,
       selected: props.attributes.profId == prof.id
