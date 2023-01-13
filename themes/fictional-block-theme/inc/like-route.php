@@ -15,7 +15,7 @@ function universityLikeRoutes() {
 }
 
 function createLike($data) {
-  if(is_user_logged_in()) {
+  if (is_user_logged_in()) {
     $professor = sanitize_text_field($data['professorId']);
 
     $existQuery = new WP_Query(array(
@@ -34,7 +34,7 @@ function createLike($data) {
       return wp_insert_post(array(
         'post_type' => 'like',
         'post_status' => 'publish',
-        'post_title' => 'Our PHP Create Post Test',
+        'post_title' => '2nd PHP Test',
         'meta_input' => array(
           'liked_professor_id' => $professor
         )
@@ -43,20 +43,19 @@ function createLike($data) {
       die("Invalid professor id");
     }
 
-
+    
   } else {
     die("Only logged in users can create a like.");
   }
 
-
+  
 }
 
 function deleteLike($data) {
   $likeId = sanitize_text_field($data['like']);
-
-  if(get_current_user_id() == get_post_field('post_author', $likeId) AND get_post_type($likeId) == 'like') {
+  if (get_current_user_id() == get_post_field('post_author', $likeId) AND get_post_type($likeId) == 'like') {
     wp_delete_post($likeId, true);
-    return ('Congrats, like deleted.');
+    return 'Congrats, like deleted.';
   } else {
     die("You do not have permission to delete that.");
   }
