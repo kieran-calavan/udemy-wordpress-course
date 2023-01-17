@@ -4,13 +4,13 @@ import { registerBlockType } from "@wordpress/blocks"
 registerBlockType("ourblocktheme/slideshow", {
   title: "Slideshow",
   supports: {
-    align: ["full"]
+    align: ["full"],
   },
   attributes: {
-    align: { type: "string", default: "full" }
+    align: { type: "string", default: "full" },
   },
   edit: EditComponent,
-  save: SaveComponent
+  save: SaveComponent,
 })
 
 function SaveComponent() {
