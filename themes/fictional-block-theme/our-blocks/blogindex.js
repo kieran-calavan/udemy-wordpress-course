@@ -5,5 +5,5 @@ wp.blocks.registerBlockType("ourblocktheme/blogindex", {
   },
   save: function () {
     return null
-  },
+  }
 })

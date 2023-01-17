@@ -5,5 +5,5 @@ wp.blocks.registerBlockType("ourblocktheme/singlepost", {
   },
   save: function () {
     return null
-  },
+  }
 })

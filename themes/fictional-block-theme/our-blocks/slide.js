@@ -7,16 +7,16 @@ import { useEffect } from "@wordpress/element"
 registerBlockType("ourblocktheme/slide", {
   title: "Slide",
   supports: {
-    align: ["full"],
+    align: ["full"]
   },
   attributes: {
     themeimage: { type: "string" },
     align: { type: "string", default: "full" },
     imgID: { type: "number" },
-    imgURL: { type: "string", default: banner.fallbackimage },
+    imgURL: { type: "string", default: banner.fallbackimage }
   },
   edit: EditComponent,
-  save: SaveComponent,
+  save: SaveComponent
 })
 
 function EditComponent(props) {
@@ -32,7 +32,7 @@ function EditComponent(props) {
         async function go() {
           const response = await apiFetch({
             path: `/wp/v2/media/${props.attributes.imgID}`,
-            method: "GET",
+            method: "GET"
           })
           props.setAttributes({ themeimage: "", imgURL: response.media_details.sizes.pageBanner.source_url })
         }
@@ -49,9 +49,7 @@ function EditComponent(props) {
   return (
     <>
       <InspectorControls>
-        <PanelBody
-          title="Background"
-          initialOpen={true}>
+        <PanelBody title="Background" initialOpen={true}>
           <PanelRow>
             <MediaUploadCheck>
               <MediaUpload
@@ -66,9 +64,7 @@ function EditComponent(props) {
         </PanelBody>
       </InspectorControls>
 
-      <div
-        className="hero-slider__slide"
-        style={{ backgroundImage: `url('${props.attributes.imgURL}')` }}>
+      <div className="hero-slider__slide" style={{ backgroundImage: `url('${props.attributes.imgURL}')` }}>
         <div className="hero-slider__interior container">
           <div className="hero-slider__overlay t-center">
             <InnerBlocks allowedBlocks={["ourblocktheme/genericheading", "ourblocktheme/genericbutton"]} />

@@ -5,5 +5,5 @@ wp.blocks.registerBlockType("ourblocktheme/page", {
   },
   save: function () {
     return null
-  },
+  }
 })
