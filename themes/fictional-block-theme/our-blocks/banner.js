@@ -7,28 +7,30 @@ import { useEffect } from "@wordpress/element"
 registerBlockType("ourblocktheme/banner", {
   title: "Banner",
   supports: {
-    align: ["full"],
+    align: ["full"]
   },
   attributes: {
     align: { type: "string", default: "full" },
     imgID: { type: "number" },
-    imgURL: { type: "string" },
+    imgURL: { type: "string", default: banner.fallbackimage }
   },
   edit: EditComponent,
-  save: SaveComponent,
+  save: SaveComponent
 })
 
 function EditComponent(props) {
   useEffect(
     function () {
-      async function go() {
-        const response = await apiFetch({
-          path: `/wp/v2/media/${props.attributes.imgID}`,
-          method: "GET",
-        })
-        props.setAttributes({ imgURL: response.media_details.sizes.pageBanner.source_url })
+      if (props.attributes.imgID) {
+        async function go() {
+          const response = await apiFetch({
+            path: `/wp/v2/media/${props.attributes.imgID}`,
+            method: "GET"
+          })
+          props.setAttributes({ imgURL: response.media_details.sizes.pageBanner.source_url })
+        }
+        go()
       }
-      go()
     },
     [props.attributes.imgID]
   )
@@ -40,9 +42,7 @@ function EditComponent(props) {
   return (
     <>
       <InspectorControls>
-        <PanelBody
-          title="Background"
-          initialOpen={true}>
+        <PanelBody title="Background" initialOpen={true}>
           <PanelRow>
             <MediaUploadCheck>
               <MediaUpload
@@ -57,9 +57,7 @@ function EditComponent(props) {
         </PanelBody>
       </InspectorControls>
       <div className="page-banner">
-        <div
-          className="page-banner__bg-image"
-          style={{ backgroundImage: `url('${props.attributes.imgURL}')` }}></div>
+        <div className="page-banner__bg-image" style={{ backgroundImage: `url('${props.attributes.imgURL}')` }}></div>
         <div className="page-banner__content container t-center c-white">
           <InnerBlocks allowedBlocks={["ourblocktheme/genericheading", "ourblocktheme/genericbutton"]} />
         </div>
