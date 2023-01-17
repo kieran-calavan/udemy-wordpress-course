@@ -21,15 +21,15 @@ add_action('rest_api_init', 'university_custom_rest');
 
 function pageBanner($args = NULL) {
 
-  if (!$args['title']) {
+  if (!isset($args['title'])) {
     $args['title'] = get_the_title();
   }
 
-  if (!$args['subtitle']) {
+  if (!isset($args['subtitle'])) {
     $args['subtitle'] = get_field('page_banner_subtitle');
   }
 
-  if (!$args['photo']) {
+  if (!isset($args['photo'])) {
     if (get_field('page_banner_background_image') and !is_archive() and !is_home()) {
       $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
     } else {
@@ -202,6 +202,9 @@ class PlaceholderBlock {
 new PlaceholderBlock("eventsandblogs");
 new PlaceholderBlock("header");
 new PlaceholderBlock("footer");
+new PlaceholderBlock("singlepost");
+new PlaceholderBlock("page");
+new PlaceholderBlock("blogindex");
 
 class JSXBlock {
   function __construct($name, $renderCallback = null, $data = null) {
